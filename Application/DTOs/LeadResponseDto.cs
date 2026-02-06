@@ -4,18 +4,23 @@ namespace CrudLeads.Application.DTOs
 {
     public class LeadResponseDto
     {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string ContactNumber { get; set; }
-        public string SalesAgent { get; set; }
-        public string CoOwner { get; set; }
-        public string Project { get; set; }
-        public string LeadSource { get; set; }
-        public string ChannelPartner { get; set; }
-        public string SourcingManager { get; set; }
+        public long Id { get; set; }
+        public long BrokerId { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string Title { get; set; }
         public string Remark { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public string Mobile { get; set; }
+        public long ActivityTypeId { get; set; }
+        public string ActivityTypeName { get; set; }
+        public int? AssignedBy { get; set; }
+        public DateTime ScheduleDate { get; set; }
+        public int? ReminderMinutes { get; set; }
+        public bool RemindMe { get; set; }
+        public bool Completed { get; set; }
+        public DateTime? CompletedOn { get; set; }
+        public int? CompletedBy { get; set; }
+        public string Stage { get; set; }
+        public string Status { get; set; }
+        public string Action { get; set; }
     }
 }

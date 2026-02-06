@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -145,25 +145,48 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\BrokerController.cs" />
     <Compile Include="Controllers\LeadController.cs" />
+    <Compile Include="Controllers\ActivityTypeController.cs" />
+    <Compile Include="Domain\Entities\Broker.cs" />
     <Compile Include="Domain\Entities\Lead.cs" />
+    <Compile Include="Domain\Entities\ActivityType.cs" />
     <Compile Include="Domain\Interfaces\IGenericRepository.cs" />
     <Compile Include="Domain\Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Domain\Interfaces\IBrokerRepository.cs" />
     <Compile Include="Domain\Interfaces\ILeadRepository.cs" />
+    <Compile Include="Domain\Interfaces\IActivityTypeRepository.cs" />
+    <Compile Include="Application\DTOs\BrokerCreateDto.cs" />
+    <Compile Include="Application\DTOs\BrokerUpdateDto.cs" />
+    <Compile Include="Application\DTOs\BrokerResponseDto.cs" />
     <Compile Include="Application\DTOs\LeadCreateDto.cs" />
     <Compile Include="Application\DTOs\LeadUpdateDto.cs" />
     <Compile Include="Application\DTOs\LeadResponseDto.cs" />
+    <Compile Include="Application\DTOs\ActivityTypeResponseDto.cs" />
+    <Compile Include="Application\Interfaces\IBrokerService.cs" />
     <Compile Include="Application\Interfaces\ILeadService.cs" />
+    <Compile Include="Application\Interfaces\IActivityTypeService.cs" />
+    <Compile Include="Application\Mapping\BrokerMappingProfile.cs" />
     <Compile Include="Application\Mapping\LeadMappingProfile.cs" />
+    <Compile Include="Application\Mapping\ActivityTypeMappingProfile.cs" />
     <Compile Include="Infrastructure\Data\ApplicationDbContext.cs" />
     <Compile Include="Infrastructure\Repositories\GenericRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\BrokerRepository.cs" />
     <Compile Include="Infrastructure\Repositories\LeadRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\ActivityTypeRepository.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Infrastructure\Services\BrokerService.cs" />
     <Compile Include="Infrastructure\Services\LeadService.cs" />
+    <Compile Include="Infrastructure\Services\ActivityTypeService.cs" />
     <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
+    <Compile Include="Migrations\202602051249232_RefactorToBrokerAndLead.cs" />
+    <Compile Include="Migrations\202602051249232_RefactorToBrokerAndLead.designer.cs">
+      <DependentUpon>202602051249232_RefactorToBrokerAndLead.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\202602050000000_InitialCreate.cs" />
+    <Compile Include="Migrations\202602050000001_RenameLeadToBrokerAndCreateNewTables.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -185,6 +208,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202602051249232_RefactorToBrokerAndLead.resx">
+      <DependentUpon>202602051249232_RefactorToBrokerAndLead.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

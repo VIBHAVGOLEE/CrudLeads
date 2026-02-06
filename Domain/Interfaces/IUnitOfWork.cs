@@ -1,11 +1,10 @@
 namespace CrudLeads.Domain.Interfaces
 {
-    /// <summary>
-    /// Unit of Work interface for transactional operations.
-    /// </summary>
     public interface IUnitOfWork
     {
+        IBrokerRepository Brokers { get; }
         ILeadRepository Leads { get; }
+        IActivityTypeRepository ActivityTypes { get; }
         void SaveChanges();
     }
 }

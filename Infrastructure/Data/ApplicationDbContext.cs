@@ -3,9 +3,6 @@ using CrudLeads.Domain.Entities;
 
 namespace CrudLeads.Infrastructure.Data
 {
-    /// <summary>
-    /// EF Code First DbContext for the application.
-    /// </summary>
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext()
@@ -18,48 +15,87 @@ namespace CrudLeads.Infrastructure.Data
         {
         }
 
+        public virtual DbSet<Broker> Brokers { get; set; }
         public virtual DbSet<Lead> Leads { get; set; }
+        public virtual DbSet<ActivityType> ActivityTypes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Lead>()
+            modelBuilder.Entity<Broker>()
                 .Property(e => e.FirstName)
                 .IsRequired()
                 .HasMaxLength(100);
 
-            modelBuilder.Entity<Lead>()
+            modelBuilder.Entity<Broker>()
                 .Property(e => e.LastName)
                 .IsRequired()
                 .HasMaxLength(100);
 
-            modelBuilder.Entity<Lead>()
+            modelBuilder.Entity<Broker>()
                 .Property(e => e.ContactNumber)
                 .IsRequired()
                 .HasMaxLength(12);
 
-            modelBuilder.Entity<Lead>()
+            modelBuilder.Entity<Broker>()
                 .Property(e => e.SalesAgent)
                 .HasMaxLength(200);
 
-            modelBuilder.Entity<Lead>()
+            modelBuilder.Entity<Broker>()
                 .Property(e => e.CoOwner)
                 .HasMaxLength(200);
 
-            modelBuilder.Entity<Lead>()
+            modelBuilder.Entity<Broker>()
                 .Property(e => e.Project)
                 .HasMaxLength(200);
 
-            modelBuilder.Entity<Lead>()
+            modelBuilder.Entity<Broker>()
                 .Property(e => e.LeadSource)
                 .HasMaxLength(200);
 
-            modelBuilder.Entity<Lead>()
+            modelBuilder.Entity<Broker>()
                 .Property(e => e.ChannelPartner)
                 .HasMaxLength(200);
 
-            modelBuilder.Entity<Lead>()
+            modelBuilder.Entity<Broker>()
                 .Property(e => e.SourcingManager)
                 .HasMaxLength(200);
+
+            modelBuilder.Entity<Lead>()
+                .Property(e => e.Title)
+                .HasMaxLength(200);
+
+            modelBuilder.Entity<Lead>()
+                .Property(e => e.Mobile)
+                .HasMaxLength(20);
+
+            modelBuilder.Entity<Lead>()
+                .Property(e => e.Stage)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Lead>()
+                .Property(e => e.Status)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Lead>()
+                .Property(e => e.Action)
+                .HasMaxLength(200);
+
+            modelBuilder.Entity<Lead>()
+                .HasRequired(l => l.Broker)
+                .WithMany()
+                .HasForeignKey(l => l.BrokerId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Lead>()
+                .HasRequired(l => l.ActivityType)
+                .WithMany()
+                .HasForeignKey(l => l.ActivityTypeId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ActivityType>()
+                .Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(50);
 
             base.OnModelCreating(modelBuilder);
         }

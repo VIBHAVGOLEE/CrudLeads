@@ -7,49 +7,40 @@ using CrudLeads.Application.Interfaces;
 
 namespace CrudLeads.Controllers
 {
-    [RoutePrefix("api/leads")]
-    public class LeadController : ApiController
+    [RoutePrefix("api/brokers")]
+    public class BrokerController : ApiController
     {
-        private readonly ILeadService _leadService;
+        private readonly IBrokerService _brokerService;
 
-        public LeadController(ILeadService leadService)
+        public BrokerController(IBrokerService brokerService)
         {
-            _leadService = leadService;
+            _brokerService = brokerService;
         }
 
         [HttpGet]
         [Route("")]
-        [ResponseType(typeof(IEnumerable<LeadResponseDto>))]
+        [ResponseType(typeof(IEnumerable<BrokerResponseDto>))]
         public IHttpActionResult GetAll()
         {
-            var leads = _leadService.GetAll();
-            return Ok(leads);
-        }
-
-        [HttpGet]
-        [Route("broker/{brokerId:long}")]
-        [ResponseType(typeof(IEnumerable<LeadResponseDto>))]
-        public IHttpActionResult GetByBrokerId(long brokerId)
-        {
-            var leads = _leadService.GetByBrokerId(brokerId);
-            return Ok(leads);
+            var brokers = _brokerService.GetAll();
+            return Ok(brokers);
         }
 
         [HttpGet]
         [Route("{id:long}")]
-        [ResponseType(typeof(LeadResponseDto))]
+        [ResponseType(typeof(BrokerResponseDto))]
         public IHttpActionResult GetById(long id)
         {
-            var lead = _leadService.GetById(id);
-            if (lead == null)
+            var broker = _brokerService.GetById(id);
+            if (broker == null)
                 return NotFound();
-            return Ok(lead);
+            return Ok(broker);
         }
 
         [HttpPost]
         [Route("")]
-        [ResponseType(typeof(LeadResponseDto))]
-        public IHttpActionResult Create([FromBody] LeadCreateDto dto)
+        [ResponseType(typeof(BrokerResponseDto))]
+        public IHttpActionResult Create([FromBody] BrokerCreateDto dto)
         {
             if (dto == null)
                 return BadRequest("Request body is required.");
@@ -57,14 +48,14 @@ namespace CrudLeads.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var created = _leadService.Create(dto);
+            var created = _brokerService.Create(dto);
             return Content(HttpStatusCode.Created, created);
         }
 
         [HttpPut]
         [Route("{id:long}")]
-        [ResponseType(typeof(LeadResponseDto))]
-        public IHttpActionResult Update(long id, [FromBody] LeadUpdateDto dto)
+        [ResponseType(typeof(BrokerResponseDto))]
+        public IHttpActionResult Update(long id, [FromBody] BrokerUpdateDto dto)
         {
             if (dto == null)
                 return BadRequest("Request body is required.");
@@ -72,7 +63,7 @@ namespace CrudLeads.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var updated = _leadService.Update(id, dto);
+            var updated = _brokerService.Update(id, dto);
             if (updated == null)
                 return NotFound();
             return Ok(updated);
@@ -82,12 +73,11 @@ namespace CrudLeads.Controllers
         [Route("{id:long}")]
         public IHttpActionResult Delete(long id)
         {
-            var lead = _leadService.GetById(id);
-            if (lead == null)
+            var broker = _brokerService.GetById(id);
+            if (broker == null)
                 return NotFound();
-            _leadService.Delete(id);
+            _brokerService.Delete(id);
             return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }
-

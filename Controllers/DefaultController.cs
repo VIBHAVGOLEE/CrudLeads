@@ -5,15 +5,9 @@ using System.Web.Http;
 
 namespace CrudLeads.Controllers
 {
-    /// <summary>
-    /// Redirects site root to Swagger UI.
-    /// </summary>
     [RoutePrefix("")]
     public class DefaultController : ApiController
     {
-        /// <summary>
-        /// Redirect root to Swagger UI.
-        /// </summary>
         [HttpGet]
         [Route("")]
         public HttpResponseMessage Get()

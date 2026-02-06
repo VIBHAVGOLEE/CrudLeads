@@ -3,9 +3,6 @@ namespace CrudLeads.Migrations
     using System;
     using System.Data.Entity.Migrations;
 
-    /// <summary>
-    /// Initial migration creating Leads table.
-    /// </summary>
     public class InitialCreate : DbMigration
     {
         public override void Up()

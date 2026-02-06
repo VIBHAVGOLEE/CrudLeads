@@ -8,9 +8,6 @@ using CrudLeads.Infrastructure.Data;
 
 namespace CrudLeads.Infrastructure.Repositories
 {
-    /// <summary>
-    /// Generic EF repository implementation.
-    /// </summary>
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly ApplicationDbContext Context;
@@ -22,7 +19,7 @@ namespace CrudLeads.Infrastructure.Repositories
             DbSet = context.Set<T>();
         }
 
-        public virtual T GetById(int id)
+        public virtual T GetById(long id)
         {
             return DbSet.Find(id);
         }

@@ -1,47 +1,59 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CrudLeads.Domain.Entities
 {
     public class Lead
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
-        [StringLength(100)]
-        public string FirstName { get; set; }
+        public long BrokerId { get; set; }
 
         [Required]
-        [StringLength(100)]
-        public string LastName { get; set; }
-
-        [Required]
-        [StringLength(12)]
-        [RegularExpression(@"^91[6-9]\d{9}$", ErrorMessage = "Contact number must be Indian format: 91XXXXXXXXXX (10 digits after 91).")]
-        public string ContactNumber { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [StringLength(200)]
-        public string SalesAgent { get; set; }
-
-        [StringLength(200)]
-        public string CoOwner { get; set; }
-
-        [StringLength(200)]
-        public string Project { get; set; }
-
-        [StringLength(200)]
-        public string LeadSource { get; set; }
-
-        [StringLength(200)]
-        public string ChannelPartner { get; set; }
-
-        [StringLength(200)]
-        public string SourcingManager { get; set; }
+        public string Title { get; set; }
 
         public string Remark { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        [StringLength(20)]
+        public string Mobile { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        [Required]
+        public long ActivityTypeId { get; set; }
+
+        public int? AssignedBy { get; set; }
+
+        [Required]
+        public DateTime ScheduleDate { get; set; }
+
+        [Range(0, 1440)]
+        public int? ReminderMinutes { get; set; }
+
+        public bool RemindMe { get; set; }
+
+        public bool Completed { get; set; }
+
+        public DateTime? CompletedOn { get; set; }
+
+        public int? CompletedBy { get; set; }
+
+        [StringLength(100)]
+        public string Stage { get; set; }
+
+        [StringLength(100)]
+        public string Status { get; set; }
+
+        [StringLength(200)]
+        public string Action { get; set; }
+
+        [ForeignKey("BrokerId")]
+        public virtual Broker Broker { get; set; }
+
+        [ForeignKey("ActivityTypeId")]
+        public virtual ActivityType ActivityType { get; set; }
     }
 }

@@ -3,9 +3,6 @@ using Swashbuckle.Application;
 
 namespace CrudLeads
 {
-    /// <summary>
-    /// Swagger (Swashbuckle) configuration for Web API 2.
-    /// </summary>
     public static class SwaggerConfig
     {
         public static void Register(HttpConfiguration config)

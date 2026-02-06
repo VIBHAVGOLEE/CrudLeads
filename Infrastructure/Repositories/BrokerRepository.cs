@@ -4,9 +4,9 @@ using CrudLeads.Infrastructure.Data;
 
 namespace CrudLeads.Infrastructure.Repositories
 {
-    public class LeadRepository : GenericRepository<Lead>, ILeadRepository
+    public class BrokerRepository : GenericRepository<Broker>, IBrokerRepository
     {
-        public LeadRepository(ApplicationDbContext context)
+        public BrokerRepository(ApplicationDbContext context)
             : base(context)
         {
         }

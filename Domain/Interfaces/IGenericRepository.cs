@@ -4,12 +4,9 @@ using System.Linq.Expressions;
 
 namespace CrudLeads.Domain.Interfaces
 {
-    /// <summary>
-    /// Generic repository interface for entity CRUD.
-    /// </summary>
     public interface IGenericRepository<T> where T : class
     {
-        T GetById(int id);
+        T GetById(long id);
         IEnumerable<T> GetAll();
         IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
         void Add(T entity);

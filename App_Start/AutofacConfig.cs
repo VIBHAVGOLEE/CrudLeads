@@ -12,9 +12,6 @@ using CrudLeads.Infrastructure;
 
 namespace CrudLeads
 {
-    /// <summary>
-    /// Autofac dependency injection configuration.
-    /// </summary>
     public static class AutofacConfig
     {
         public static void Configure()
@@ -35,13 +32,23 @@ namespace CrudLeads
             {
                 var config = new MapperConfiguration(cfg =>
                 {
+                    cfg.AddProfile<BrokerMappingProfile>();
                     cfg.AddProfile<LeadMappingProfile>();
+                    cfg.AddProfile<ActivityTypeMappingProfile>();
                 });
                 return config.CreateMapper();
             }).As<IMapper>().SingleInstance();
 
+            builder.RegisterType<BrokerService>()
+                .As<IBrokerService>()
+                .InstancePerRequest();
+
             builder.RegisterType<LeadService>()
                 .As<ILeadService>()
+                .InstancePerRequest();
+
+            builder.RegisterType<ActivityTypeService>()
+                .As<IActivityTypeService>()
                 .InstancePerRequest();
 
             var container = builder.Build();

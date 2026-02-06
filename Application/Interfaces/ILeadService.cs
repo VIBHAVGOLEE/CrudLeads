@@ -6,9 +6,10 @@ namespace CrudLeads.Application.Interfaces
     public interface ILeadService
     {
         IEnumerable<LeadResponseDto> GetAll();
-        LeadResponseDto GetById(int id);
+        IEnumerable<LeadResponseDto> GetByBrokerId(long brokerId);
+        LeadResponseDto GetById(long id);
         LeadResponseDto Create(LeadCreateDto dto);
-        LeadResponseDto Update(int id, LeadUpdateDto dto);
-        void Delete(int id);
+        LeadResponseDto Update(long id, LeadUpdateDto dto);
+        void Delete(long id);
     }
 }

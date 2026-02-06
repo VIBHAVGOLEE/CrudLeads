@@ -9,10 +9,8 @@ namespace CrudLeads
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
             SwaggerConfig.Register(config);
 
-            // Web API routes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
