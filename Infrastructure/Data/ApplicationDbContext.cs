@@ -18,6 +18,10 @@ namespace CrudLeads.Infrastructure.Data
         public virtual DbSet<Broker> Brokers { get; set; }
         public virtual DbSet<Lead> Leads { get; set; }
         public virtual DbSet<ActivityType> ActivityTypes { get; set; }
+        public virtual DbSet<Status> Statuses { get; set; }
+        public virtual DbSet<LeadSource> LeadSources { get; set; }
+        public virtual DbSet<FollowUp> FollowUps { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -96,6 +100,36 @@ namespace CrudLeads.Infrastructure.Data
                 .Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(50);
+
+            modelBuilder.Entity<Status>()
+                .Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<Status>()
+                .Property(e => e.Category)
+                .HasMaxLength(20);
+
+            modelBuilder.Entity<LeadSource>()
+                .Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<FollowUp>()
+                .Property(e => e.Remark)
+                .HasMaxLength(500);
+
+            modelBuilder.Entity<Customer>()
+                .Property(e => e.FirstName)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Customer>()
+                .Property(e => e.LastName)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Customer>()
+                .Property(e => e.ContactNumber)
+                .HasMaxLength(12);
 
             base.OnModelCreating(modelBuilder);
         }

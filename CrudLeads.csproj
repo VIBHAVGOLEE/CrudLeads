@@ -148,14 +148,26 @@
     <Compile Include="Controllers\BrokerController.cs" />
     <Compile Include="Controllers\LeadController.cs" />
     <Compile Include="Controllers\ActivityTypeController.cs" />
+    <Compile Include="Controllers\FollowUpController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="Controllers\LeadSourceController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Domain\Entities\Broker.cs" />
     <Compile Include="Domain\Entities\Lead.cs" />
     <Compile Include="Domain\Entities\ActivityType.cs" />
+    <Compile Include="Domain\Entities\Status.cs" />
+    <Compile Include="Domain\Entities\LeadSource.cs" />
+    <Compile Include="Domain\Entities\FollowUp.cs" />
+    <Compile Include="Domain\Entities\Customer.cs" />
     <Compile Include="Domain\Interfaces\IGenericRepository.cs" />
     <Compile Include="Domain\Interfaces\IUnitOfWork.cs" />
     <Compile Include="Domain\Interfaces\IBrokerRepository.cs" />
     <Compile Include="Domain\Interfaces\ILeadRepository.cs" />
     <Compile Include="Domain\Interfaces\IActivityTypeRepository.cs" />
+    <Compile Include="Domain\Interfaces\IFollowUpRepository.cs" />
+    <Compile Include="Domain\Interfaces\IStatusRepository.cs" />
+    <Compile Include="Domain\Interfaces\ILeadSourceRepository.cs" />
+    <Compile Include="Domain\Interfaces\ICustomerRepository.cs" />
     <Compile Include="Application\DTOs\BrokerCreateDto.cs" />
     <Compile Include="Application\DTOs\BrokerUpdateDto.cs" />
     <Compile Include="Application\DTOs\BrokerResponseDto.cs" />
@@ -163,26 +175,56 @@
     <Compile Include="Application\DTOs\LeadUpdateDto.cs" />
     <Compile Include="Application\DTOs\LeadResponseDto.cs" />
     <Compile Include="Application\DTOs\ActivityTypeResponseDto.cs" />
+    <Compile Include="Application\DTOs\FollowUpCreateDto.cs" />
+    <Compile Include="Application\DTOs\FollowUpUpdateDto.cs" />
+    <Compile Include="Application\DTOs\FollowUpResponseDto.cs" />
+    <Compile Include="Application\DTOs\StatusResponseDto.cs" />
+    <Compile Include="Application\DTOs\LeadSourceResponseDto.cs" />
+    <Compile Include="Application\DTOs\CustomerResponseDto.cs" />
     <Compile Include="Application\Interfaces\IBrokerService.cs" />
     <Compile Include="Application\Interfaces\ILeadService.cs" />
     <Compile Include="Application\Interfaces\IActivityTypeService.cs" />
+    <Compile Include="Application\Interfaces\IFollowUpService.cs" />
+    <Compile Include="Application\Interfaces\IStatusService.cs" />
+    <Compile Include="Application\Interfaces\ILeadSourceService.cs" />
+    <Compile Include="Application\Interfaces\ICustomerService.cs" />
     <Compile Include="Application\Mapping\BrokerMappingProfile.cs" />
     <Compile Include="Application\Mapping\LeadMappingProfile.cs" />
     <Compile Include="Application\Mapping\ActivityTypeMappingProfile.cs" />
+    <Compile Include="Application\Mapping\FollowUpMappingProfile.cs" />
+    <Compile Include="Application\Mapping\StatusMappingProfile.cs" />
+    <Compile Include="Application\Mapping\LeadSourceMappingProfile.cs" />
+    <Compile Include="Application\Mapping\CustomerMappingProfile.cs" />
     <Compile Include="Infrastructure\Data\ApplicationDbContext.cs" />
     <Compile Include="Infrastructure\Repositories\GenericRepository.cs" />
     <Compile Include="Infrastructure\Repositories\BrokerRepository.cs" />
     <Compile Include="Infrastructure\Repositories\LeadRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ActivityTypeRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\FollowUpRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\StatusRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\LeadSourceRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\CustomerRepository.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Infrastructure\Services\BrokerService.cs" />
     <Compile Include="Infrastructure\Services\LeadService.cs" />
     <Compile Include="Infrastructure\Services\ActivityTypeService.cs" />
+    <Compile Include="Infrastructure\Services\FollowUpService.cs" />
+    <Compile Include="Infrastructure\Services\StatusService.cs" />
+    <Compile Include="Infrastructure\Services\LeadSourceService.cs" />
+    <Compile Include="Infrastructure\Services\CustomerService.cs" />
     <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Migrations\202602051249232_RefactorToBrokerAndLead.cs" />
     <Compile Include="Migrations\202602051249232_RefactorToBrokerAndLead.designer.cs">
       <DependentUpon>202602051249232_RefactorToBrokerAndLead.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202602060934074_AddFollowUpStatusCustomer.cs" />
+    <Compile Include="Migrations\202602060934074_AddFollowUpStatusCustomer.designer.cs">
+      <DependentUpon>202602060934074_AddFollowUpStatusCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202602061004537_AddLeadNameFields.cs" />
+    <Compile Include="Migrations\202602061004537_AddLeadNameFields.designer.cs">
+      <DependentUpon>202602061004537_AddLeadNameFields.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\202602050000000_InitialCreate.cs" />
@@ -212,6 +254,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202602051249232_RefactorToBrokerAndLead.resx">
       <DependentUpon>202602051249232_RefactorToBrokerAndLead.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202602060934074_AddFollowUpStatusCustomer.resx">
+      <DependentUpon>202602060934074_AddFollowUpStatusCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202602061004537_AddLeadNameFields.resx">
+      <DependentUpon>202602061004537_AddLeadNameFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

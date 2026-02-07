@@ -7,6 +7,8 @@ namespace CrudLeads.Application.DTOs
         public long Id { get; set; }
         public long BrokerId { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Title { get; set; }
         public string Remark { get; set; }
         public string Mobile { get; set; }

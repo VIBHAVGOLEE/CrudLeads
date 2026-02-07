@@ -46,6 +46,7 @@ namespace CrudLeads.Infrastructure.Services
             if (entity.Completed)
             {
                 entity.CompletedOn = DateTime.UtcNow;
+                EnsureCustomerForLead(entity);
             }
             _unitOfWork.Leads.Add(entity);
             _unitOfWork.SaveChanges();
@@ -86,6 +87,11 @@ namespace CrudLeads.Infrastructure.Services
 
             _unitOfWork.Leads.Update(entity);
             _unitOfWork.SaveChanges();
+            if (entity.Completed)
+            {
+                EnsureCustomerForLead(entity);
+                _unitOfWork.SaveChanges();
+            }
             return MapToDto(entity);
         }
 
@@ -106,6 +112,25 @@ namespace CrudLeads.Infrastructure.Services
                 dto.ActivityTypeName = lead.ActivityType.Name;
             }
             return dto;
+        }
+
+        private void EnsureCustomerForLead(Lead lead)
+        {
+            var existing = _unitOfWork.Customers.GetByLeadId(lead.Id);
+            if (existing != null)
+                return;
+
+            var customer = new Customer
+            {
+                BrokerId = lead.BrokerId,
+                LeadId = lead.Id,
+                FirstName = lead.FirstName,
+                LastName = lead.LastName,
+                ContactNumber = lead.Mobile,
+                CreatedOn = DateTime.UtcNow
+            };
+
+            _unitOfWork.Customers.Add(customer);
         }
     }
 }

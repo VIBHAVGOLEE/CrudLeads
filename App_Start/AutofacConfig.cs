@@ -35,6 +35,10 @@ namespace CrudLeads
                     cfg.AddProfile<BrokerMappingProfile>();
                     cfg.AddProfile<LeadMappingProfile>();
                     cfg.AddProfile<ActivityTypeMappingProfile>();
+                    cfg.AddProfile<FollowUpMappingProfile>();
+                    cfg.AddProfile<StatusMappingProfile>();
+                    cfg.AddProfile<LeadSourceMappingProfile>();
+                    cfg.AddProfile<CustomerMappingProfile>();
                 });
                 return config.CreateMapper();
             }).As<IMapper>().SingleInstance();
@@ -49,6 +53,22 @@ namespace CrudLeads
 
             builder.RegisterType<ActivityTypeService>()
                 .As<IActivityTypeService>()
+                .InstancePerRequest();
+
+            builder.RegisterType<FollowUpService>()
+                .As<IFollowUpService>()
+                .InstancePerRequest();
+
+            builder.RegisterType<StatusService>()
+                .As<IStatusService>()
+                .InstancePerRequest();
+
+            builder.RegisterType<LeadSourceService>()
+                .As<ILeadSourceService>()
+                .InstancePerRequest();
+
+            builder.RegisterType<CustomerService>()
+                .As<ICustomerService>()
                 .InstancePerRequest();
 
             var container = builder.Build();

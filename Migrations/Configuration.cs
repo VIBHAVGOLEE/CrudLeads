@@ -26,6 +26,33 @@ namespace CrudLeads.Migrations
                 context.SaveChanges();
             }
 
+            if (!context.Statuses.Any())
+            {
+                context.Statuses.AddOrUpdate(
+                    s => s.Name,
+                    new Status { Name = "New", Category = "Lead" },
+                    new Status { Name = "Untouched", Category = "Lead" },
+                    new Status { Name = "Returned", Category = "Lead" },
+                    new Status { Name = "Converted", Category = "Lead" },
+                    new Status { Name = "Planned", Category = "FollowUp" },
+                    new Status { Name = "Done", Category = "FollowUp" },
+                    new Status { Name = "NoAnswer", Category = "FollowUp" },
+                    new Status { Name = "Rescheduled", Category = "FollowUp" }
+                );
+                context.SaveChanges();
+            }
+
+            if (!context.LeadSources.Any())
+            {
+                context.LeadSources.AddOrUpdate(
+                    s => s.Name,
+                    new LeadSource { Name = "Other" },
+                    new LeadSource { Name = "Facebook" },
+                    new LeadSource { Name = "99acres" }
+                );
+                context.SaveChanges();
+            }
+
             if (!context.Brokers.Any())
             {
                 context.Brokers.AddOrUpdate(

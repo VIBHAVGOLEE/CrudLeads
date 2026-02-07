@@ -10,6 +10,10 @@ namespace CrudLeads.Infrastructure
         private IBrokerRepository _brokers;
         private ILeadRepository _leads;
         private IActivityTypeRepository _activityTypes;
+        private IFollowUpRepository _followUps;
+        private IStatusRepository _statuses;
+        private ILeadSourceRepository _leadSources;
+        private ICustomerRepository _customers;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -29,6 +33,26 @@ namespace CrudLeads.Infrastructure
         public IActivityTypeRepository ActivityTypes
         {
             get { return _activityTypes ?? (_activityTypes = new ActivityTypeRepository(_context)); }
+        }
+
+        public IFollowUpRepository FollowUps
+        {
+            get { return _followUps ?? (_followUps = new FollowUpRepository(_context)); }
+        }
+
+        public IStatusRepository Statuses
+        {
+            get { return _statuses ?? (_statuses = new StatusRepository(_context)); }
+        }
+
+        public ILeadSourceRepository LeadSources
+        {
+            get { return _leadSources ?? (_leadSources = new LeadSourceRepository(_context)); }
+        }
+
+        public ICustomerRepository Customers
+        {
+            get { return _customers ?? (_customers = new CustomerRepository(_context)); }
         }
 
         public void SaveChanges()

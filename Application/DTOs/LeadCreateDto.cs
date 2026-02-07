@@ -8,6 +8,12 @@ namespace CrudLeads.Application.DTOs
         [Required(ErrorMessage = "BrokerId is required")]
         public long BrokerId { get; set; }
 
+        [StringLength(100)]
+        public string FirstName { get; set; }
+
+        [StringLength(100)]
+        public string LastName { get; set; }
+
         [StringLength(200)]
         public string Title { get; set; }
 
