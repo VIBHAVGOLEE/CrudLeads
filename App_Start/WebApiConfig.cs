@@ -9,6 +9,8 @@ namespace CrudLeads
     {
         public static void Register(HttpConfiguration config)
         {
+            config.MessageHandlers.Add(new CrudLeads.Infrastructure.Security.JwtHandler());
+
             SwaggerConfig.Register(config);
 
             config.MapHttpAttributeRoutes();

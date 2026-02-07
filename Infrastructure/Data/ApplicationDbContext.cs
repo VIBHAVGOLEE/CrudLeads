@@ -22,6 +22,8 @@ namespace CrudLeads.Infrastructure.Data
         public virtual DbSet<LeadSource> LeadSources { get; set; }
         public virtual DbSet<FollowUp> FollowUps { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -130,6 +132,36 @@ namespace CrudLeads.Infrastructure.Data
             modelBuilder.Entity<Customer>()
                 .Property(e => e.ContactNumber)
                 .HasMaxLength(12);
+
+            modelBuilder.Entity<Role>()
+                .Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.UserName)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.Email)
+                .HasMaxLength(200);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.PasswordHash)
+                .IsRequired()
+                .HasMaxLength(500);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.PasswordSalt)
+                .IsRequired()
+                .HasMaxLength(500);
+
+            modelBuilder.Entity<User>()
+                .HasRequired(u => u.Role)
+                .WithMany()
+                .HasForeignKey(u => u.RoleId)
+                .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
         }

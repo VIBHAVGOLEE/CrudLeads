@@ -2,6 +2,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using CrudLeads.Domain.Entities;
 using CrudLeads.Infrastructure.Data;
+using CrudLeads.Infrastructure.Security;
 
 namespace CrudLeads.Migrations
 {
@@ -76,6 +77,38 @@ namespace CrudLeads.Migrations
                         LeadSource = "Referral",
                         CreatedAt = System.DateTime.UtcNow,
                         UpdatedAt = System.DateTime.UtcNow
+                    }
+                );
+                context.SaveChanges();
+            }
+
+            if (!context.Roles.Any())
+            {
+                context.Roles.AddOrUpdate(
+                    r => r.Name,
+                    new Role { Id = 1, Name = "Admin" },
+                    new Role { Id = 2, Name = "Broker" },
+                    new Role { Id = 3, Name = "EndUser" }
+                );
+                context.SaveChanges();
+            }
+
+            if (!context.Users.Any())
+            {
+                string hash, salt;
+                PasswordHelper.HashPassword("Admin@123", out hash, out salt);
+                context.Users.AddOrUpdate(
+                    u => u.UserName,
+                    new User
+                    {
+                        Id = 1,
+                        UserName = "admin",
+                        Email = "admin@crudleads.local",
+                        PasswordHash = hash,
+                        PasswordSalt = salt,
+                        RoleId = 1,
+                        IsActive = true,
+                        CreatedOn = System.DateTime.UtcNow
                     }
                 );
                 context.SaveChanges();

@@ -9,6 +9,8 @@ namespace CrudLeads.Domain.Interfaces
         IStatusRepository Statuses { get; }
         ILeadSourceRepository LeadSources { get; }
         ICustomerRepository Customers { get; }
+        IUserRepository Users { get; }
+        IRoleRepository Roles { get; }
         void SaveChanges();
     }
 }

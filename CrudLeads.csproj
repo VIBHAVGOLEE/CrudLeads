@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -135,6 +135,18 @@
     <Reference Include="Swashbuckle.Core">
       <HintPath>packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens">
+      <HintPath>packages\Microsoft.IdentityModel.JsonWebTokens.5.6.0\lib\net451\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging">
+      <HintPath>packages\Microsoft.IdentityModel.Logging.5.6.0\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens">
+      <HintPath>packages\Microsoft.IdentityModel.Tokens.5.6.0\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>packages\System.IdentityModel.Tokens.Jwt.5.6.0\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
@@ -152,6 +164,9 @@
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\LeadSourceController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Domain\Entities\Broker.cs" />
     <Compile Include="Domain\Entities\Lead.cs" />
     <Compile Include="Domain\Entities\ActivityType.cs" />
@@ -159,6 +174,8 @@
     <Compile Include="Domain\Entities\LeadSource.cs" />
     <Compile Include="Domain\Entities\FollowUp.cs" />
     <Compile Include="Domain\Entities\Customer.cs" />
+    <Compile Include="Domain\Entities\Role.cs" />
+    <Compile Include="Domain\Entities\User.cs" />
     <Compile Include="Domain\Interfaces\IGenericRepository.cs" />
     <Compile Include="Domain\Interfaces\IUnitOfWork.cs" />
     <Compile Include="Domain\Interfaces\IBrokerRepository.cs" />
@@ -168,6 +185,8 @@
     <Compile Include="Domain\Interfaces\IStatusRepository.cs" />
     <Compile Include="Domain\Interfaces\ILeadSourceRepository.cs" />
     <Compile Include="Domain\Interfaces\ICustomerRepository.cs" />
+    <Compile Include="Domain\Interfaces\IUserRepository.cs" />
+    <Compile Include="Domain\Interfaces\IRoleRepository.cs" />
     <Compile Include="Application\DTOs\BrokerCreateDto.cs" />
     <Compile Include="Application\DTOs\BrokerUpdateDto.cs" />
     <Compile Include="Application\DTOs\BrokerResponseDto.cs" />
@@ -181,6 +200,12 @@
     <Compile Include="Application\DTOs\StatusResponseDto.cs" />
     <Compile Include="Application\DTOs\LeadSourceResponseDto.cs" />
     <Compile Include="Application\DTOs\CustomerResponseDto.cs" />
+    <Compile Include="Application\DTOs\LoginRequestDto.cs" />
+    <Compile Include="Application\DTOs\LoginResponseDto.cs" />
+    <Compile Include="Application\DTOs\UserResponseDto.cs" />
+    <Compile Include="Application\DTOs\RoleResponseDto.cs" />
+    <Compile Include="Application\DTOs\UserCreateDto.cs" />
+    <Compile Include="Application\DTOs\UserUpdateDto.cs" />
     <Compile Include="Application\Interfaces\IBrokerService.cs" />
     <Compile Include="Application\Interfaces\ILeadService.cs" />
     <Compile Include="Application\Interfaces\IActivityTypeService.cs" />
@@ -188,6 +213,9 @@
     <Compile Include="Application\Interfaces\IStatusService.cs" />
     <Compile Include="Application\Interfaces\ILeadSourceService.cs" />
     <Compile Include="Application\Interfaces\ICustomerService.cs" />
+    <Compile Include="Application\Interfaces\IAuthService.cs" />
+    <Compile Include="Application\Interfaces\IRoleService.cs" />
+    <Compile Include="Application\Interfaces\IUserService.cs" />
     <Compile Include="Application\Mapping\BrokerMappingProfile.cs" />
     <Compile Include="Application\Mapping\LeadMappingProfile.cs" />
     <Compile Include="Application\Mapping\ActivityTypeMappingProfile.cs" />
@@ -195,6 +223,8 @@
     <Compile Include="Application\Mapping\StatusMappingProfile.cs" />
     <Compile Include="Application\Mapping\LeadSourceMappingProfile.cs" />
     <Compile Include="Application\Mapping\CustomerMappingProfile.cs" />
+    <Compile Include="Application\Mapping\RoleMappingProfile.cs" />
+    <Compile Include="Application\Mapping\UserMappingProfile.cs" />
     <Compile Include="Infrastructure\Data\ApplicationDbContext.cs" />
     <Compile Include="Infrastructure\Repositories\GenericRepository.cs" />
     <Compile Include="Infrastructure\Repositories\BrokerRepository.cs" />
@@ -204,6 +234,10 @@
     <Compile Include="Infrastructure\Repositories\StatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\LeadSourceRepository.cs" />
     <Compile Include="Infrastructure\Repositories\CustomerRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RoleRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\UserRepository.cs" />
+    <Compile Include="Infrastructure\Security\PasswordHelper.cs" />
+    <Compile Include="Infrastructure\Security\JwtHandler.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Infrastructure\Services\BrokerService.cs" />
     <Compile Include="Infrastructure\Services\LeadService.cs" />
@@ -212,6 +246,9 @@
     <Compile Include="Infrastructure\Services\StatusService.cs" />
     <Compile Include="Infrastructure\Services\LeadSourceService.cs" />
     <Compile Include="Infrastructure\Services\CustomerService.cs" />
+    <Compile Include="Infrastructure\Services\AuthService.cs" />
+    <Compile Include="Infrastructure\Services\RoleService.cs" />
+    <Compile Include="Infrastructure\Services\UserService.cs" />
     <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Migrations\202602051249232_RefactorToBrokerAndLead.cs" />
@@ -225,6 +262,10 @@
     <Compile Include="Migrations\202602061004537_AddLeadNameFields.cs" />
     <Compile Include="Migrations\202602061004537_AddLeadNameFields.designer.cs">
       <DependentUpon>202602061004537_AddLeadNameFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202602070617016_AddUserAndRole.cs" />
+    <Compile Include="Migrations\202602070617016_AddUserAndRole.designer.cs">
+      <DependentUpon>202602070617016_AddUserAndRole.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\202602050000000_InitialCreate.cs" />
@@ -260,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202602061004537_AddLeadNameFields.resx">
       <DependentUpon>202602061004537_AddLeadNameFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202602070617016_AddUserAndRole.resx">
+      <DependentUpon>202602070617016_AddUserAndRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

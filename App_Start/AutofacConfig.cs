@@ -39,6 +39,8 @@ namespace CrudLeads
                     cfg.AddProfile<StatusMappingProfile>();
                     cfg.AddProfile<LeadSourceMappingProfile>();
                     cfg.AddProfile<CustomerMappingProfile>();
+                    cfg.AddProfile<RoleMappingProfile>();
+                    cfg.AddProfile<UserMappingProfile>();
                 });
                 return config.CreateMapper();
             }).As<IMapper>().SingleInstance();
@@ -69,6 +71,18 @@ namespace CrudLeads
 
             builder.RegisterType<CustomerService>()
                 .As<ICustomerService>()
+                .InstancePerRequest();
+
+            builder.RegisterType<AuthService>()
+                .As<IAuthService>()
+                .InstancePerRequest();
+
+            builder.RegisterType<RoleService>()
+                .As<IRoleService>()
+                .InstancePerRequest();
+
+            builder.RegisterType<UserService>()
+                .As<IUserService>()
                 .InstancePerRequest();
 
             var container = builder.Build();

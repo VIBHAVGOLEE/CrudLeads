@@ -14,6 +14,8 @@ namespace CrudLeads.Infrastructure
         private IStatusRepository _statuses;
         private ILeadSourceRepository _leadSources;
         private ICustomerRepository _customers;
+        private IUserRepository _users;
+        private IRoleRepository _roles;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -53,6 +55,16 @@ namespace CrudLeads.Infrastructure
         public ICustomerRepository Customers
         {
             get { return _customers ?? (_customers = new CustomerRepository(_context)); }
+        }
+
+        public IUserRepository Users
+        {
+            get { return _users ?? (_users = new UserRepository(_context)); }
+        }
+
+        public IRoleRepository Roles
+        {
+            get { return _roles ?? (_roles = new RoleRepository(_context)); }
         }
 
         public void SaveChanges()
