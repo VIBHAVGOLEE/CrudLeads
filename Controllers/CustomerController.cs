@@ -6,6 +6,7 @@ using CrudLeads.Application.Interfaces;
 
 namespace CrudLeads.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/customers")]
     public class CustomerController : ApiController
     {

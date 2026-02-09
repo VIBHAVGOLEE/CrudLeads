@@ -7,6 +7,7 @@ using CrudLeads.Application.Interfaces;
 
 namespace CrudLeads.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/users")]
     public class UserController : ApiController
     {
